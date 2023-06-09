@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sandwich Maker</title>
+  <style>
+    /* Add your custom styles here */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sandwich Maker</h1>
+  </header>
+  
+  <section>
+    <h2>Choose your ingredients:</h2>
+    <form id="sandwich-form">
+      <label for="bread">Bread:</label>
+      <select name="bread" id="bread">
+        <option value="white">White</option>
+        <option value="wheat">Wheat</option>
+        <option value="rye">Rye</option>
+      </select>
+
+      <label for="meat">Meat:</label>
+      <input type="checkbox" name="meat" value="ham"> Ham
+      <input type="checkbox" name="meat" value="turkey"> Turkey
+      <input type="checkbox" name="meat" value="chicken"> Chicken
+
+      <label for="cheese">Cheese:</label>
+      <input type="radio" name="cheese" value="cheddar"> Cheddar
+      <input type="radio" name="cheese" value="swiss"> Swiss
+      <input type="radio" name="cheese" value="provolone"> Provolone
+
+      <label for="veggies">Veggies:</label>
+      <input type="checkbox" name="veggies" value="lettuce"> Lettuce
+      <input type="checkbox" name="veggies" value="tomato"> Tomato
+      <input type="checkbox" name="veggies" value="onion"> Onion
+
+      <input type="submit" value="Make Sandwich">
+    </form>
+  </section>
+  
+  <section id="sandwich-result">
+    <h2>Your sandwich:</h2>
+    <div id="sandwich-details"></div>
+  </section>
+
+  <script>
+    // JavaScript code to handle form submission and display sandwich details
+    const form = document.getElementById('sandwich-form');
+    const sandwichDetails = document.getElementById('sandwich-details');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const bread = document.getElementById('bread').value;
+      const meats = [...document.querySelectorAll('input[name="meat"]:checked')].map(checkbox => checkbox.value);
+      const cheese = document.querySelector('input[name="cheese"]:checked').value;
+      const veggies = [...document.querySelectorAll('input[name="veggies"]:checked')].map(checkbox => checkbox.value);
+
+      // Display sandwich details
+      sandwichDetails.innerHTML = `
+        <p>Bread: ${bread}</p>
+        <p>Meat: ${meats.join(', ')}</p>
+        <p>Cheese: ${cheese}</p>
+        <p>Veggies: ${veggies.join(', ')}</p>
+      `;
+    });
+  </script>
+</body>
+</html>
